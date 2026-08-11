@@ -1,0 +1,43 @@
+justours.love {
+	encode zstd gzip
+	reverse_proxy showcase:3000
+
+	log {
+		output stdout
+		format json
+	}
+}
+
+analytics.justours.love {
+	encode zstd gzip
+	reverse_proxy analytics:3000
+
+	log {
+		output stdout
+		format json
+	}
+}
+
+unseal.justours.love {
+	encode zstd gzip
+	reverse_proxy unseal:3000 {
+		header_up X-Real-IP {remote_host}
+	}
+
+	log {
+		output stdout
+		format json
+	}
+}
+
+mailbox.justours.love {
+	encode zstd gzip
+	reverse_proxy mailbox:3000 {
+		header_up X-Real-IP {remote_host}
+	}
+
+	log {
+		output stdout
+		format json
+	}
+}

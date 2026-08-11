@@ -95,6 +95,18 @@ After the first start, change the initial Umami admin password immediately. Add
 the generated website ID to `NEXT_PUBLIC_UMAMI_WEBSITE_ID` and deploy again; this
 value is embedded into the showcase during its Docker build.
 
+An optional Caddy edge stack is provided under `deploy/caddy`. Run it after the
+application network exists, setting `APP_NETWORK` when the application Compose
+project is not named `justours-app`:
+
+```bash
+docker compose -f deploy/caddy/compose.yml config --quiet
+docker compose -f deploy/caddy/compose.yml up -d
+```
+
+Application commands explicitly select `docker-compose.yml`, so a colocated edge
+stack such as `compose.yml` cannot be selected accidentally by Compose discovery.
+
 The low-level equivalent of `make deploy` is:
 
 ```bash

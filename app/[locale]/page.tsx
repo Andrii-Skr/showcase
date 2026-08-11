@@ -36,7 +36,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <section className="collection-intro" id="collection"><Reveal><p className="eyebrow">{copy.collectionLabel}</p><h2>{copy.collectionTitle}</h2></Reveal></section>
     <div className="app-stories">
       {apps.map((app) => { const content = app.content[locale]; const media = app.media[locale]; const launchUrl = withLocaleParam(app.liveUrl, locale); return <section className="app-story" key={app.slug} style={{ "--app-accent": app.accent } as React.CSSProperties}>
-        <div className="story-copy"><p className="story-number">{app.number}</p><p className="eyebrow">{content.eyebrow}</p><h2>{content.name}</h2><h3>{content.tagline}</h3><p>{content.summary}</p><Link className="text-link" href={`/${locale}/apps/${app.slug}`} data-umami-event="app_detail_view" data-umami-event-app={app.slug} data-umami-event-locale={locale}>{copy.detailLabel}<span aria-hidden>↗</span></Link></div>
+        <div className="story-copy"><p className="story-number">{app.number}</p><p className="eyebrow">{content.eyebrow}</p><h2>{content.name}</h2><h3>{content.tagline}</h3><p>{content.summary}</p></div>
         <Reveal className="story-art"><div className="artwork-shell"><AppArtwork app={app} poster={media.poster} alt={content.imageAlt[0]} /><AppPreview app={app.slug} locale={locale} embedUrl={app.embedUrl} origin={app.origin} poster={media.poster} alt={content.imageAlt[0]} launchUrl={launchUrl} surface="home" labels={{ open: content.previewLabel, close: copy.closePreview, loading: copy.loadingPreview, unavailable: content.unavailableLabel, launch: content.launchLabel }} /></div></Reveal>
       </section>; })}
     </div>

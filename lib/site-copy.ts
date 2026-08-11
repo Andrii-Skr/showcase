@@ -9,7 +9,6 @@ type SiteCopy = {
   heroCta: string;
   collectionLabel: string;
   collectionTitle: string;
-  detailLabel: string;
   detailCta: string;
   finalKicker: string;
   finalTitle: string;
@@ -32,7 +31,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     heroTitle: "Ваше кохання. Ваші маленькі світи.",
     heroBody: "Три способи сказати важливе — у листах, власним голосом або крізь історію, яку хочеться відкривати повільно.",
     heroCta: "Знайти свій спосіб", collectionLabel: "Колекція Just Ours Love",
-    collectionTitle: "Оберіть настрій. Решту ми перетворимо на момент.", detailLabel: "Дізнатися більше",
+    collectionTitle: "Оберіть настрій. Решту ми перетворимо на момент.",
     detailCta: "Перейти до застосунку", finalKicker: "Just Ours Love",
     finalTitle: "Між вами вже є історія. Додайте їй ще одну сцену.",
     finalBody: "Оберіть застосунок і почніть із одного щирого жесту.", finalCta: "Повернутися до колекції",
@@ -51,7 +50,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     heroTitle: "Ваша любовь. Ваши маленькие миры.",
     heroBody: "Три способа сказать важное — в письмах, собственным голосом или через историю, которую хочется открывать медленно.",
     heroCta: "Найти свой способ", collectionLabel: "Коллекция Just Ours Love",
-    collectionTitle: "Выберите настроение. Остальное мы превратим в момент.", detailLabel: "Узнать больше",
+    collectionTitle: "Выберите настроение. Остальное мы превратим в момент.",
     detailCta: "Перейти в приложение", finalKicker: "Just Ours Love",
     finalTitle: "Между вами уже есть история. Добавьте ей ещё одну сцену.",
     finalBody: "Выберите приложение и начните с одного искреннего жеста.", finalCta: "Вернуться к коллекции",
@@ -70,7 +69,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     heroTitle: "Your love. Your little worlds.",
     heroBody: "Three ways to say what matters — in letters, in your own voice, or through a story worth opening slowly.",
     heroCta: "Find your way", collectionLabel: "The Just Ours Love collection",
-    collectionTitle: "Choose the feeling. We’ll turn it into a moment.", detailLabel: "Discover the story",
+    collectionTitle: "Choose the feeling. We’ll turn it into a moment.",
     detailCta: "Open the app", finalKicker: "Just Ours Love",
     finalTitle: "You already have a story. Give it one more scene.",
     finalBody: "Choose an app and begin with one honest gesture.", finalCta: "Return to the collection",

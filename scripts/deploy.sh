@@ -9,7 +9,7 @@ readonly STATE_DIR="${DEPLOY_STATE_DIR:-.deploy}"
 readonly CURRENT_RELEASE_FILE="$STATE_DIR/current-release"
 readonly PREVIOUS_RELEASE_FILE="$STATE_DIR/previous-release"
 readonly WAIT_TIMEOUT="${WAIT_TIMEOUT:-${DEPLOY_WAIT_TIMEOUT:-180}}"
-readonly COMPOSE=(docker compose --env-file "$ENV_FILE")
+readonly COMPOSE=(docker compose --env-file "$ENV_FILE" --file docker-compose.yml)
 
 log() {
   printf '[deploy] %s\n' "$*"

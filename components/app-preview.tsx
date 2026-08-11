@@ -121,7 +121,12 @@ export function AppPreview({ app, locale, embedUrl, origin, poster, alt, launchU
             animate={{ y: 0, scale: 1 }}
             exit={{ y: 18, scale: .99 }}
           >
-            <button ref={closeRef} className="preview-modal-close" type="button" onClick={close}>{labels.close}<span aria-hidden>×</span></button>
+            <button ref={closeRef} className="preview-modal-close" type="button" onClick={close}>
+              <span className="preview-modal-close-label">{labels.close}</span>
+              <svg aria-hidden viewBox="0 0 20 20">
+                <path d="M4 4l12 12M16 4 4 16" />
+              </svg>
+            </button>
             {state === "failed" ? (
               <div className="preview-modal-failed">
                 <div className="preview-modal-poster" style={{ backgroundImage: `url(${poster})` }} role="img" aria-label={alt} />

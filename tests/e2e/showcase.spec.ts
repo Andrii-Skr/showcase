@@ -46,9 +46,9 @@ test("not-found pages preserve a supported locale and fall back for an unknown o
 test("catalog renders all three products", async ({ page }) => {
   await page.goto("/en");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-  await expect(page.locator('[href="/en/apps/love-mailbox"]')).toBeVisible();
-  await expect(page.locator('[href="/en/apps/paw-love"]')).toBeVisible();
-  await expect(page.locator('[href="/en/apps/unseal"]')).toBeVisible();
+  for (const name of ["Love Mailbox", "Paw Love", "Unseal"]) {
+    await expect(page.getByRole("heading", { name, exact: true })).toBeVisible();
+  }
   await expect(page.locator('[href="/en/apps/valentine"]')).toHaveCount(0);
   await expect(page.locator(".poster-preview-trigger")).toHaveCount(3);
 });
@@ -101,6 +101,24 @@ test("mobile-first layout has no page overflow and keeps actions touchable", asy
   const primaryAction = page.locator(".hero .text-link");
   const actionBox = await primaryAction.boundingBox();
   expect(actionBox?.height).toBeGreaterThanOrEqual(44);
+
+  await page.locator(".poster-preview-trigger").first().click();
+  const closeButton = page.locator(".preview-modal-close");
+  const closeLabel = closeButton.locator(".preview-modal-close-label");
+  const closeIcon = closeButton.locator("svg");
+  const [closeBox, frameBox, labelBox, iconBox] = await Promise.all([
+    closeButton.boundingBox(),
+    page.locator(".preview-modal iframe").boundingBox(),
+    closeLabel.boundingBox(),
+    closeIcon.boundingBox(),
+  ]);
+
+  expect(closeBox).not.toBeNull();
+  expect(frameBox).not.toBeNull();
+  expect(labelBox).not.toBeNull();
+  expect(iconBox).not.toBeNull();
+  expect(closeBox!.y + closeBox!.height).toBeLessThanOrEqual(frameBox!.y);
+  expect(Math.abs(labelBox!.y + labelBox!.height / 2 - (iconBox!.y + iconBox!.height / 2))).toBeLessThanOrEqual(1);
 });
 
 test("poster artwork preserves the complete image", async ({ page }) => {

@@ -4,7 +4,7 @@ ENV_FILE ?= .env
 WAIT_TIMEOUT ?= 180
 CURRENT_RELEASE := $(shell sed -n '1p' .deploy/current-release 2>/dev/null)
 RELEASE_TAG ?= $(if $(CURRENT_RELEASE),$(CURRENT_RELEASE),latest)
-COMPOSE := RELEASE_TAG=$(RELEASE_TAG) docker compose --env-file $(ENV_FILE)
+COMPOSE := RELEASE_TAG=$(RELEASE_TAG) docker compose --env-file $(ENV_FILE) --file docker-compose.yml
 
 .DEFAULT_GOAL := help
 
