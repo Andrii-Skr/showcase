@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200">
+  <rect width="900" height="1200" fill="#efe1cb"/>
+  <path d="M0 850c210-90 455-66 900-176v526H0Z" fill="#b87863"/>
+  <g transform="translate(110 190) rotate(-3 340 390)">
+    <rect width="680" height="800" rx="8" fill="#fffaf0" stroke="#c8a98b" stroke-width="5"/>
+    <path d="M0 0l340 330L680 0" fill="#ead1af"/>
+    <path d="M0 800l340-390 340 390" fill="#f1ddc0"/>
+    <circle cx="340" cy="390" r="70" fill="#9b4053"/>
+    <path d="M340 425c-72-42-44-106 0-58 44-48 72 16 0 58Z" fill="#f3c0b8"/>
+    <text x="340" y="650" text-anchor="middle" fill="#513a32" font-family="Georgia" font-size="42">one more letter</text>
+    <text x="340" y="710" text-anchor="middle" fill="#806052" font-family="Georgia" font-size="30">just for you</text>
+  </g>
+</svg>

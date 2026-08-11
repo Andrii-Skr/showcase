@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200">
+  <defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#e7b19a"/><stop offset=".55" stop-color="#cf846f"/><stop offset="1" stop-color="#604047"/></linearGradient></defs>
+  <rect width="900" height="1200" fill="url(#sky)"/>
+  <circle cx="690" cy="235" r="145" fill="#ffe7bf" opacity=".78"/>
+  <path d="M0 760C180 700 332 735 495 690c145-40 258-19 405 25v485H0Z" fill="#6b5545"/>
+  <path d="M0 835c250-70 500-23 900-90v455H0Z" fill="#3d3730"/>
+  <g transform="translate(150 355)">
+    <path d="M178 530h48v315h-48z" fill="#72513f"/>
+    <path d="M390 530h48v315h-48z" fill="#5f4437"/>
+    <path d="M95 245c0-94 76-170 170-170h186c82 0 149 67 149 149v325H95Z" fill="#b56555" stroke="#6f4038" stroke-width="8"/>
+    <path d="M95 245c0-94 76-170 170-170h72v474H95Z" fill="#c97965"/>
+    <path d="M337 82c68 11 118 70 118 140v327H337Z" fill="#985446" opacity=".7"/>
+    <path d="M141 224h254v230H141Z" fill="#a65e50" stroke="#754139" stroke-width="7"/>
+    <path d="M141 224l127 108 127-108" fill="#efd8b8" stroke="#754139" stroke-width="7"/>
+    <path d="M477 68h20v218h-20z" fill="#754139"/>
+    <path d="M497 72h93l-22 54 22 54h-93Z" fill="#8e3348"/>
+    <text x="267" y="405" text-anchor="middle" fill="#fff0d4" font-family="Georgia" font-size="34">Alex ♥ Julia</text>
+  </g>
+  <text x="450" y="1050" text-anchor="middle" fill="#fff3df" font-family="Georgia" font-size="76">Love Mailbox</text>
+  <text x="450" y="1105" text-anchor="middle" fill="#f2d3bb" font-family="Arial" font-size="18" letter-spacing="6">LETTERS WAITING FOR YOU</text>
+</svg>
