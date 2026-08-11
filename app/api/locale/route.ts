@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
-import { isLocale } from "@/lib/i18n";
+import { isLocale, safeLocalPath } from "@/lib/i18n";
 
 export function GET(request: Request) {
   const url = new URL(request.url);
   const locale = url.searchParams.get("locale");
   const next = url.searchParams.get("next");
-  const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/";
-  if (!isLocale(locale)) return NextResponse.redirect(new URL("/", url));
-  const response = NextResponse.redirect(new URL(safeNext, url));
+  if (!isLocale(locale)) return new NextResponse(null, { status: 307, headers: { Location: "/" } });
+  const response = new NextResponse(null, { status: 307, headers: { Location: safeLocalPath(next) } });
   response.cookies.set("justours_locale", locale, {
     maxAge: 31_536_000,
     path: "/",

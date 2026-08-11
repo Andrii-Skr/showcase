@@ -23,7 +23,7 @@ export function SiteHeader({ locale, appsLabel, privacyLabel }: { locale: Locale
       </nav>
       <div className="locale-switcher" aria-label="Language">
         {locales.map((item) => (
-          <Link
+          <a
             aria-current={item === locale ? "page" : undefined}
             data-umami-event="locale_change"
             data-umami-event-locale={item}
@@ -31,7 +31,7 @@ export function SiteHeader({ locale, appsLabel, privacyLabel }: { locale: Locale
             key={item}
           >
             {item.toUpperCase()}
-          </Link>
+          </a>
         ))}
       </div>
     </header>

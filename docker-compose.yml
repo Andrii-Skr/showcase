@@ -1,23 +1,49 @@
+name: ${COMPOSE_PROJECT_NAME:-justours}
+
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: ${DOCKER_LOG_MAX_SIZE:-10m}
+    max-file: ${DOCKER_LOG_MAX_FILES:-3}
+
 services:
   showcase:
+    image: ${SHOWCASE_IMAGE:-justours/showcase}:${RELEASE_TAG:-latest}
     build:
       context: .
       args:
+        APP_VERSION: ${RELEASE_TAG:-latest}
         NEXT_PUBLIC_UMAMI_WEBSITE_ID: ${NEXT_PUBLIC_UMAMI_WEBSITE_ID:-}
     restart: unless-stopped
+    init: true
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     environment:
       NEXT_PUBLIC_UMAMI_WEBSITE_ID: ${NEXT_PUBLIC_UMAMI_WEBSITE_ID:-}
     ports:
-      - "${SHOWCASE_PORT:-3000}:3000"
+      - "127.0.0.1:${SHOWCASE_PORT:-3000}:3000"
+    volumes:
+      - showcase-cache:/app/.next/cache
+    tmpfs:
+      - /tmp:uid=1001,gid=1001,mode=1777
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:3000/api/health"]
       interval: 20s
       timeout: 5s
       retries: 5
+      start_period: 15s
+    stop_grace_period: 20s
+    logging: *default-logging
+    networks:
+      - public
 
   analytics-db:
     image: postgres:17.5-alpine
     restart: unless-stopped
+    shm_size: 128mb
     environment:
       POSTGRES_DB: umami
       POSTGRES_USER: umami
@@ -29,23 +55,43 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+      start_period: 10s
+    stop_grace_period: 1m
+    logging: *default-logging
+    networks:
+      - analytics-internal
 
   analytics:
     image: ghcr.io/umami-software/umami:3.2.0
     restart: unless-stopped
+    init: true
+    security_opt:
+      - no-new-privileges:true
     depends_on:
       analytics-db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://umami:${UMAMI_DB_PASSWORD}@analytics-db:5432/umami
+      DATABASE_URL: ${UMAMI_DATABASE_URL:?set UMAMI_DATABASE_URL}
       APP_SECRET: ${UMAMI_APP_SECRET:?set UMAMI_APP_SECRET}
     ports:
-      - "${UMAMI_PORT:-3001}:3000"
+      - "127.0.0.1:${UMAMI_PORT:-3001}:3000"
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:3000/api/heartbeat"]
       interval: 20s
       timeout: 5s
       retries: 5
+      start_period: 30s
+    stop_grace_period: 30s
+    logging: *default-logging
+    networks:
+      - public
+      - analytics-internal
 
 volumes:
+  showcase-cache:
   umami-db:
+
+networks:
+  public:
+  analytics-internal:
+    internal: true

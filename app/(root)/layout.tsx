@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import "./globals.css";
+import "../globals.css";
 import { Analytics } from "@/components/analytics";
 
 export const metadata: Metadata = {
@@ -12,5 +12,5 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#150d13" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html data-scroll-behavior="smooth" suppressHydrationWarning><body>{children}<Analytics /></body></html>;
+  return <html lang="en" data-scroll-behavior="smooth"><body>{children}<Analytics /></body></html>;
 }

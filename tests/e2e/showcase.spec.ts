@@ -18,6 +18,31 @@ test("root locale selection prefers cookie over Accept-Language", async ({ reque
   expect(saved.headers().location).toBe("/ru");
 });
 
+test("locale redirect cannot leave the current origin", async ({ request }) => {
+  const response = await request.get("/api/locale?locale=en&next=/%5Cevil.example", { maxRedirects: 0 });
+  expect(response.headers().location).toBe("/");
+});
+
+test("localized pages declare their document language", async ({ page }) => {
+  for (const locale of ["uk", "ru", "en"]) {
+    await page.goto(`/${locale}`);
+    await expect(page.locator("html")).toHaveAttribute("lang", locale);
+  }
+});
+
+test("not-found pages preserve a supported locale and fall back for an unknown one", async ({ page }) => {
+  const localized = await page.goto("/ru/apps/missing");
+  expect(localized?.status()).toBe(404);
+  await expect(page.locator("html")).toHaveAttribute("lang", "ru");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Этого маленького мира здесь нет.");
+  await expect(page.getByRole("link", { name: "Назад в Just Ours Love" })).toHaveAttribute("href", "/ru");
+
+  const fallback = await page.goto("/fr/unknown/path");
+  expect(fallback?.status()).toBe(404);
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("This little world isn’t here.");
+});
+
 test("catalog renders all three products", async ({ page }) => {
   await page.goto("/en");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
@@ -35,6 +60,11 @@ test("poster preview opens a lazy modal and preserves locale", async ({ page }) 
   await page.locator(".poster-preview-trigger").first().click();
   const modal = page.getByRole("dialog");
   await expect(modal).toBeVisible();
+  await expect(modal.locator(".preview-modal-close")).toBeFocused();
+  await page.keyboard.press("Shift+Tab");
+  await expect(modal.locator(".preview-modal-launch")).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(modal.locator(".preview-modal-close")).toBeFocused();
   await expect(modal.locator("iframe")).toHaveAttribute("src", /^(?:https:\/\/mailbox\.justours\.love|http:\/\/127\.0\.0\.1:3411)\/demo\?lang=ru$/);
   await expect(modal.locator(".preview-modal-launch")).toHaveAttribute(
     "href",
@@ -43,6 +73,7 @@ test("poster preview opens a lazy modal and preserves locale", async ({ page }) 
   await expect(modal.locator(".preview-modal-launch")).toHaveAttribute("data-umami-event-surface", "preview");
   await expect(page.locator("iframe")).toHaveCount(1);
   await page.keyboard.press("Escape");
+  expect(await modal.count()).toBe(1);
   await expect(modal).toHaveCount(0);
   await expect(page.locator("iframe")).toHaveCount(0);
 });
@@ -150,11 +181,22 @@ test("preview timeout returns to the poster and keeps the launch fallback", asyn
 
 test("locale switch keeps the current product", async ({ page }) => {
   await page.goto("/en/apps/paw-love");
+  await page.waitForTimeout(1_000);
+  expect((await page.context().cookies()).find((cookie) => cookie.name === "justours_locale")).toBeUndefined();
   const englishPoster = await page.locator(".artwork-poster").getAttribute("src");
   expect(englishPoster).toContain("paw-love-01-en.jpg");
   await page.locator(".locale-switcher a", { hasText: "RU" }).click();
   await expect(page).toHaveURL(/\/ru\/apps\/paw-love$/);
+  expect((await page.context().cookies()).find((cookie) => cookie.name === "justours_locale")?.value).toBe("ru");
   const russianPoster = await page.locator(".artwork-poster").getAttribute("src");
   expect(russianPoster).toContain("paw-love-01-ru.jpg");
   expect(russianPoster).not.toBe(englishPoster);
+});
+
+test("product metadata points social previews at the current product", async ({ page }) => {
+  await page.goto("/ru/apps/paw-love");
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", "Paw Love");
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", "https://justours.love/ru/apps/paw-love");
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", "https://justours.love/ru/opengraph-image");
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://justours.love/ru/apps/paw-love");
 });

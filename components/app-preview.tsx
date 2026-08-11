@@ -25,7 +25,9 @@ export function AppPreview({ app, locale, embedUrl, origin, poster, alt, launchU
   const reduce = useReducedMotion();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<PreviewState>("closed");
+  const [present, setPresent] = useState(false);
   const isOpen = state !== "closed";
   const src = useMemo(() => withLocaleParam(embedUrl, locale), [embedUrl, locale]);
 
@@ -53,32 +55,56 @@ export function AppPreview({ app, locale, embedUrl, origin, poster, alt, launchU
 
   const close = useCallback(() => {
     setState("closed");
+  }, []);
+
+  const finishClose = useCallback(() => {
+    setPresent(false);
     window.requestAnimationFrame(() => triggerRef.current?.focus());
   }, []);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!present) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") close();
+      if (event.key === "Escape") {
+        close();
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const focusable = modalRef.current?.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), a[href], iframe, [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusable?.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKeyDown);
-    window.requestAnimationFrame(() => closeRef.current?.focus());
+    const focusFrame = window.requestAnimationFrame(() => closeRef.current?.focus());
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
+      window.cancelAnimationFrame(focusFrame);
     };
-  }, [close, isOpen]);
+  }, [close, present]);
 
   const open = () => {
+    setPresent(true);
     setState("loading");
     window.umami?.track("app_preview_open", { app, locale, surface });
   };
 
-  const modal = isOpen ? createPortal(
-    <AnimatePresence>
-      <motion.div
+  const modal = present ? createPortal(
+    <AnimatePresence onExitComplete={finishClose}>
+      {isOpen ? <motion.div
           className="preview-modal-backdrop"
           initial={reduce ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -86,6 +112,7 @@ export function AppPreview({ app, locale, embedUrl, origin, poster, alt, launchU
           onMouseDown={(event) => { if (event.target === event.currentTarget) close(); }}
         >
           <motion.div
+            ref={modalRef}
             className="preview-modal"
             role="dialog"
             aria-modal="true"
@@ -117,7 +144,7 @@ export function AppPreview({ app, locale, embedUrl, origin, poster, alt, launchU
               {labels.launch}<span aria-hidden>↗</span>
             </a>
           </motion.div>
-      </motion.div>
+      </motion.div> : null}
     </AnimatePresence>,
     document.body,
   ) : null;

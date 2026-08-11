@@ -20,6 +20,8 @@ type SiteCopy = {
   galleryTitle: string;
   closePreview: string;
   loadingPreview: string;
+  notFoundTitle: string;
+  notFoundBack: string;
   privacyTitle: string;
   privacyBody: readonly string[];
 };
@@ -36,6 +38,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     finalBody: "Оберіть застосунок і почніть із одного щирого жесту.", finalCta: "Повернутися до колекції",
     back: "Усі застосунки", previewTitle: "Живе прев’ю", galleryTitle: "Три моменти історії",
     closePreview: "Закрити прев’ю", loadingPreview: "Готуємо маленький світ…",
+    notFoundTitle: "Цього маленького світу тут немає.", notFoundBack: "Назад до Just Ours Love",
     privacyTitle: "Приватність без дрібного шрифту",
     privacyBody: [
       "Just Ours Love використовує власну інсталяцію Umami для анонімної статистики переглядів і переходів. Ми не створюємо рекламних профілів і не передаємо ідентифікатори користувачів.",
@@ -54,6 +57,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     finalBody: "Выберите приложение и начните с одного искреннего жеста.", finalCta: "Вернуться к коллекции",
     back: "Все приложения", previewTitle: "Живое превью", galleryTitle: "Три момента истории",
     closePreview: "Закрыть превью", loadingPreview: "Готовим маленький мир…",
+    notFoundTitle: "Этого маленького мира здесь нет.", notFoundBack: "Назад в Just Ours Love",
     privacyTitle: "Приватность без мелкого шрифта",
     privacyBody: [
       "Just Ours Love использует собственную установку Umami для анонимной статистики просмотров и переходов. Мы не создаём рекламных профилей и не передаём идентификаторы пользователей.",
@@ -72,6 +76,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     finalBody: "Choose an app and begin with one honest gesture.", finalCta: "Return to the collection",
     back: "All apps", previewTitle: "Live preview", galleryTitle: "Three moments in the story",
     closePreview: "Close preview", loadingPreview: "Preparing a little world…",
+    notFoundTitle: "This little world isn’t here.", notFoundBack: "Back to Just Ours Love",
     privacyTitle: "Privacy, without the small print",
     privacyBody: [
       "Just Ours Love uses a self-hosted Umami instance for anonymous page and launch statistics. We do not create advertising profiles or send user identifiers.",
