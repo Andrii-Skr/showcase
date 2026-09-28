@@ -1,6 +1,6 @@
 # Just Ours Love
 
-The shared storefront for Love Mailbox, Paw Love, and Unseal.
+The shared storefront for Love Mailbox, Paw Love, Unseal, and LoveSpin.
 
 ## Development
 
@@ -10,6 +10,7 @@ pnpm dev
 ```
 
 For the local Love Mailbox modal preview, run its repository on `127.0.0.1:3411`. The showcase remains on `127.0.0.1:3400`.
+LoveSpin runs locally on `127.0.0.1:3415`. It has no embedded demo, so the storefront links directly to its application.
 
 ## Production
 

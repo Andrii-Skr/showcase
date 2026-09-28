@@ -43,14 +43,22 @@ test("not-found pages preserve a supported locale and fall back for an unknown o
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("This little world isn’t here.");
 });
 
-test("catalog renders all three products", async ({ page }) => {
+test("catalog renders all four products", async ({ page }) => {
   await page.goto("/en");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-  for (const name of ["Love Mailbox", "Paw Love", "Unseal"]) {
+  for (const name of ["Love Mailbox", "Paw Love", "Unseal", "LoveSpin"]) {
     await expect(page.getByRole("heading", { name, exact: true })).toBeVisible();
   }
   await expect(page.locator('[href="/en/apps/valentine"]')).toHaveCount(0);
-  await expect(page.locator(".poster-preview-trigger")).toHaveCount(3);
+  await expect(page.locator("button.poster-preview-trigger")).toHaveCount(3);
+  await expect(page.getByRole("link", { name: /Explore the app/i }).last()).toHaveAttribute("href", "/en/apps/lovespin");
+});
+
+test("LoveSpin detail links to the published app without an embedded preview", async ({ page }) => {
+  await page.goto("/en/apps/lovespin");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("LoveSpin");
+  await expect(page.locator(".poster-preview-trigger")).toHaveCount(0);
+  await expect(page.locator(".app-launch").first()).toHaveAttribute("href", "https://spin.justours.love/?lang=en");
 });
 
 test("poster preview opens a lazy modal and preserves locale", async ({ page }) => {

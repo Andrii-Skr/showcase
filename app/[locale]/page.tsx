@@ -31,13 +31,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <section className="hero">
       <div className="hero-backdrop" aria-hidden><div className="hero-orbit orbit-one" /><div className="hero-orbit orbit-two" /><div className="hero-figures"><span /><span /></div><div className="grain" /></div>
       <HeroMotion><p className="eyebrow">{copy.heroKicker}</p><h1><span>Just Ours Love</span>{copy.heroTitle}</h1><p className="hero-copy">{copy.heroBody}</p><Link className="text-link light" href={`/${locale}#collection`}>{copy.heroCta}<span aria-hidden>↓</span></Link></HeroMotion>
-      <p className="hero-index" aria-hidden>01 — 03</p>
+      <p className="hero-index" aria-hidden>01 — {String(apps.length).padStart(2, "0")}</p>
     </section>
     <section className="collection-intro" id="collection"><Reveal><p className="eyebrow">{copy.collectionLabel}</p><h2>{copy.collectionTitle}</h2></Reveal></section>
     <div className="app-stories">
       {apps.map((app) => { const content = app.content[locale]; const media = app.media[locale]; const launchUrl = withLocaleParam(app.liveUrl, locale); return <section className="app-story" key={app.slug} style={{ "--app-accent": app.accent } as React.CSSProperties}>
-        <div className="story-copy"><p className="story-number">{app.number}</p><p className="eyebrow">{content.eyebrow}</p><h2>{content.name}</h2><h3>{content.tagline}</h3><p>{content.summary}</p></div>
-        <Reveal className="story-art"><div className="artwork-shell"><AppArtwork app={app} poster={media.poster} alt={content.imageAlt[0]} /><AppPreview app={app.slug} locale={locale} embedUrl={app.embedUrl} origin={app.origin} poster={media.poster} alt={content.imageAlt[0]} launchUrl={launchUrl} surface="home" labels={{ open: content.previewLabel, close: copy.closePreview, loading: copy.loadingPreview, unavailable: content.unavailableLabel, launch: content.launchLabel }} /></div></Reveal>
+        <div className="story-copy"><p className="story-number">{app.number}</p><p className="eyebrow">{content.eyebrow}</p><h2>{content.name}</h2><h3>{content.tagline}</h3><p>{content.summary}</p><Link className="text-link" href={`/${locale}/apps/${app.slug}`}>{copy.detailCta}<span aria-hidden>↗</span></Link></div>
+        <Reveal className="story-art"><div className="artwork-shell"><AppArtwork app={app} poster={media.poster} alt={content.imageAlt[0]} />{app.embedUrl ? <AppPreview app={app.slug} locale={locale} embedUrl={app.embedUrl} origin={app.origin} poster={media.poster} alt={content.imageAlt[0]} launchUrl={launchUrl} surface="home" labels={{ open: content.previewLabel, close: copy.closePreview, loading: copy.loadingPreview, unavailable: content.unavailableLabel, launch: content.launchLabel }} /> : <Link className="poster-preview-trigger" href={`/${locale}/apps/${app.slug}`}><span aria-hidden>↗</span>{copy.discoverApp}</Link>}</div></Reveal>
       </section>; })}
     </div>
     <section className="final-cta"><Reveal><p className="eyebrow">{copy.finalKicker}</p><h2>{copy.finalTitle}</h2><p>{copy.finalBody}</p><Link className="pill-link" href={`/${locale}#collection`}>{copy.finalCta}</Link></Reveal></section>

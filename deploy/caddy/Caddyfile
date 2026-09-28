@@ -41,3 +41,15 @@ mailbox.justours.love {
 		format json
 	}
 }
+
+spin.justours.love {
+	encode zstd gzip
+	reverse_proxy spin:3000 {
+		header_up X-Real-IP {remote_host}
+	}
+
+	log {
+		output stdout
+		format json
+	}
+}

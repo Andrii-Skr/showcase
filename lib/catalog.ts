@@ -1,9 +1,13 @@
 import type { Locale } from "@/lib/i18n";
 
-export const appSlugs = ["love-mailbox", "paw-love", "unseal"] as const;
+export const appSlugs = ["love-mailbox", "paw-love", "unseal", "lovespin"] as const;
 export type AppSlug = (typeof appSlugs)[number];
 
 type AppOrigin = `https://${string}.justours.love` | `http://127.0.0.1:${number}`;
+
+const loveSpinOrigin: AppOrigin = process.env.NODE_ENV === "development"
+  ? "http://127.0.0.1:3415"
+  : "https://spin.justours.love";
 
 const unsealOrigin: AppOrigin = process.env.NODE_ENV === "development"
   ? "http://127.0.0.1:3413"
@@ -33,7 +37,7 @@ export type AppDefinition = {
   slug: AppSlug;
   number: string;
   liveUrl: AppOrigin;
-  embedUrl: `${AppOrigin}/demo`;
+  embedUrl: `${AppOrigin}/demo` | null;
   origin: AppOrigin;
   media: Record<Locale, AppMedia>;
   accent: string;
@@ -182,6 +186,54 @@ export const apps = [
         previewLabel: "Open the preview",
         unavailableLabel: "The preview did not open, but the full story is waiting in the app.",
         imageAlt: ["Unseal heart", "Five locks on an Unseal card", "Final scene inside the heart"],
+      },
+    },
+  },
+  {
+    slug: "lovespin",
+    number: "04",
+    liveUrl: loveSpinOrigin,
+    embedUrl: null,
+    origin: loveSpinOrigin,
+    media: {
+      uk: { poster: "/real/lovespin-02.jpg", gallery: ["/real/lovespin-02.jpg", "/real/lovespin-03.jpg", "/real/lovespin-01.jpg"] },
+      ru: { poster: "/real/lovespin-02.jpg", gallery: ["/real/lovespin-02.jpg", "/real/lovespin-03.jpg", "/real/lovespin-01.jpg"] },
+      en: { poster: "/real/lovespin-02.jpg", gallery: ["/real/lovespin-02.jpg", "/real/lovespin-03.jpg", "/real/lovespin-01.jpg"] },
+    },
+    accent: "#bd4f6c",
+    content: {
+      uk: {
+        name: "LoveSpin",
+        eyebrow: "Три оберти для двох",
+        tagline: "Головний подарунок чекає на третьому оберті",
+        summary: "Інтерактивна листівка з двома компліментами та сюрпризом у фіналі.",
+        description: "Напишіть два особисті компліменти й підготуйте головний подарунок — фото або PDF-сертифікат. Отримувач відкриє їх за три оберти. Посилання діє сім днів. Наразі інтерфейс застосунку російською.",
+        launchLabel: "Створити LoveSpin",
+        previewLabel: "Переглянути LoveSpin",
+        unavailableLabel: "LoveSpin зараз не відкрився. Запустіть застосунок напряму.",
+        imageAlt: ["Початок персональної історії LoveSpin", "Ігровий автомат із трьома барабанами LoveSpin", "Конструктор листівки LoveSpin"],
+      },
+      ru: {
+        name: "LoveSpin",
+        eyebrow: "Три вращения для двоих",
+        tagline: "Главный подарок ждёт на третьем вращении",
+        summary: "Интерактивная открытка с двумя комплиментами и сюрпризом в финале.",
+        description: "Напишите два личных комплимента и подготовьте главный подарок — фото или PDF-сертификат. Получатель откроет их за три вращения. Ссылка действует семь дней.",
+        launchLabel: "Создать LoveSpin",
+        previewLabel: "Посмотреть LoveSpin",
+        unavailableLabel: "LoveSpin сейчас не открылся. Запустите приложение напрямую.",
+        imageAlt: ["Начало персональной истории LoveSpin", "Игровой автомат с тремя барабанами LoveSpin", "Конструктор открытки LoveSpin"],
+      },
+      en: {
+        name: "LoveSpin",
+        eyebrow: "Three spins for two",
+        tagline: "The grand prize awaits on the third spin",
+        summary: "An interactive card with two compliments and a surprise at the end.",
+        description: "Write two personal compliments and prepare the grand prize: a photo or PDF certificate. The recipient reveals them in three spins. The link lasts seven days. The app interface is currently in Russian.",
+        launchLabel: "Create a LoveSpin",
+        previewLabel: "Explore LoveSpin",
+        unavailableLabel: "LoveSpin did not open this time. You can launch the app directly.",
+        imageAlt: ["Opening of a personal LoveSpin story", "LoveSpin slot machine with three reels", "LoveSpin card builder"],
       },
     },
   },
