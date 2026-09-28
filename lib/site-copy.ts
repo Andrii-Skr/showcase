@@ -10,7 +10,6 @@ type SiteCopy = {
   collectionLabel: string;
   collectionTitle: string;
   detailCta: string;
-  discoverApp: string;
   finalKicker: string;
   finalTitle: string;
   finalBody: string;
@@ -33,7 +32,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     heroBody: "Чотири способи сказати важливе — у листах, власним голосом, крізь історію за замками або в трьох щасливих обертах.",
     heroCta: "Знайти свій спосіб", collectionLabel: "Колекція Just Ours Love",
     collectionTitle: "Оберіть настрій. Решту ми перетворимо на момент.",
-    detailCta: "Перейти до застосунку", discoverApp: "Дізнатися більше", finalKicker: "Just Ours Love",
+    detailCta: "Перейти до застосунку", finalKicker: "Just Ours Love",
     finalTitle: "Між вами вже є історія. Додайте їй ще одну сцену.",
     finalBody: "Оберіть застосунок і почніть із одного щирого жесту.", finalCta: "Повернутися до колекції",
     back: "Усі застосунки", previewTitle: "Живе прев’ю", galleryTitle: "Три моменти історії",
@@ -52,7 +51,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     heroBody: "Четыре способа сказать важное — в письмах, собственным голосом, через историю за замками или в трёх счастливых вращениях.",
     heroCta: "Найти свой способ", collectionLabel: "Коллекция Just Ours Love",
     collectionTitle: "Выберите настроение. Остальное мы превратим в момент.",
-    detailCta: "Перейти в приложение", discoverApp: "Узнать больше", finalKicker: "Just Ours Love",
+    detailCta: "Перейти в приложение", finalKicker: "Just Ours Love",
     finalTitle: "Между вами уже есть история. Добавьте ей ещё одну сцену.",
     finalBody: "Выберите приложение и начните с одного искреннего жеста.", finalCta: "Вернуться к коллекции",
     back: "Все приложения", previewTitle: "Живое превью", galleryTitle: "Три момента истории",
@@ -71,7 +70,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     heroBody: "Four ways to say what matters — in letters, in your own voice, through a story behind locks, or in three lucky spins.",
     heroCta: "Find your way", collectionLabel: "The Just Ours Love collection",
     collectionTitle: "Choose the feeling. We’ll turn it into a moment.",
-    detailCta: "Open the app", discoverApp: "Explore the app", finalKicker: "Just Ours Love",
+    detailCta: "Open the app", finalKicker: "Just Ours Love",
     finalTitle: "You already have a story. Give it one more scene.",
     finalBody: "Choose an app and begin with one honest gesture.", finalCta: "Return to the collection",
     back: "All apps", previewTitle: "Live preview", galleryTitle: "Three moments in the story",

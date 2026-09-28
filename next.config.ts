@@ -3,7 +3,7 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./lib/i18n-request.ts");
 const isDevelopment = process.env.NODE_ENV === "development";
-const localDemoFrames = isDevelopment ? " http://127.0.0.1:3411 http://localhost:3411 http://127.0.0.1:3413 http://localhost:3413" : "";
+const localDemoFrames = isDevelopment ? " http://127.0.0.1:3411 http://localhost:3411 http://127.0.0.1:3413 http://localhost:3413 http://127.0.0.1:3415 http://localhost:3415" : "";
 
 const csp = [
   "default-src 'self'",
@@ -12,7 +12,7 @@ const csp = [
   "img-src 'self' data: blob:",
   "font-src 'self' data:",
   "connect-src 'self' https://analytics.justours.love",
-  `frame-src https://mailbox.justours.love https://paw.justours.love https://unseal.justours.love${localDemoFrames}`,
+  `frame-src https://mailbox.justours.love https://paw.justours.love https://unseal.justours.love https://spin.justours.love${localDemoFrames}`,
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",

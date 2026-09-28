@@ -37,7 +37,7 @@ export type AppDefinition = {
   slug: AppSlug;
   number: string;
   liveUrl: AppOrigin;
-  embedUrl: `${AppOrigin}/demo` | null;
+  embedUrl: `${AppOrigin}/demo`;
   origin: AppOrigin;
   media: Record<Locale, AppMedia>;
   accent: string;
@@ -193,12 +193,12 @@ export const apps = [
     slug: "lovespin",
     number: "04",
     liveUrl: loveSpinOrigin,
-    embedUrl: null,
+    embedUrl: `${loveSpinOrigin}/demo`,
     origin: loveSpinOrigin,
     media: {
-      uk: { poster: "/real/lovespin-02.jpg", gallery: ["/real/lovespin-02.jpg", "/real/lovespin-03.jpg", "/real/lovespin-01.jpg"] },
-      ru: { poster: "/real/lovespin-02.jpg", gallery: ["/real/lovespin-02.jpg", "/real/lovespin-03.jpg", "/real/lovespin-01.jpg"] },
-      en: { poster: "/real/lovespin-02.jpg", gallery: ["/real/lovespin-02.jpg", "/real/lovespin-03.jpg", "/real/lovespin-01.jpg"] },
+      uk: { poster: "/real/lovespin-uk.jpg", gallery: ["/real/lovespin-uk.jpg", "/real/lovespin-03.jpg", "/real/lovespin-01.jpg"] },
+      ru: { poster: "/real/lovespin-ru.jpg", gallery: ["/real/lovespin-ru.jpg", "/real/lovespin-03.jpg", "/real/lovespin-01.jpg"] },
+      en: { poster: "/real/lovespin-en.jpg", gallery: ["/real/lovespin-en.jpg", "/real/lovespin-03.jpg", "/real/lovespin-01.jpg"] },
     },
     accent: "#bd4f6c",
     content: {
@@ -207,7 +207,7 @@ export const apps = [
         eyebrow: "Три оберти для двох",
         tagline: "Головний подарунок чекає на третьому оберті",
         summary: "Інтерактивна листівка з двома компліментами та сюрпризом у фіналі.",
-        description: "Напишіть два особисті компліменти й підготуйте головний подарунок — фото або PDF-сертифікат. Отримувач відкриє їх за три оберти. Посилання діє сім днів. Наразі інтерфейс застосунку російською.",
+        description: "Напишіть два особисті компліменти й підготуйте головний подарунок — фото або PDF-сертифікат. Отримувач відкриє їх за три оберти. Посилання діє сім днів. Демо доступне українською; конструктор листівки поки російською.",
         launchLabel: "Створити LoveSpin",
         previewLabel: "Переглянути LoveSpin",
         unavailableLabel: "LoveSpin зараз не відкрився. Запустіть застосунок напряму.",
@@ -229,7 +229,7 @@ export const apps = [
         eyebrow: "Three spins for two",
         tagline: "The grand prize awaits on the third spin",
         summary: "An interactive card with two compliments and a surprise at the end.",
-        description: "Write two personal compliments and prepare the grand prize: a photo or PDF certificate. The recipient reveals them in three spins. The link lasts seven days. The app interface is currently in Russian.",
+        description: "Write two personal compliments and prepare the grand prize: a photo or PDF certificate. The recipient reveals them in three spins. The link lasts seven days. The demo is in English; the card builder is currently in Russian.",
         launchLabel: "Create a LoveSpin",
         previewLabel: "Explore LoveSpin",
         unavailableLabel: "LoveSpin did not open this time. You can launch the app directly.",

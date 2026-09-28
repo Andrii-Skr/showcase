@@ -50,15 +50,21 @@ test("catalog renders all four products", async ({ page }) => {
     await expect(page.getByRole("heading", { name, exact: true })).toBeVisible();
   }
   await expect(page.locator('[href="/en/apps/valentine"]')).toHaveCount(0);
-  await expect(page.locator("button.poster-preview-trigger")).toHaveCount(3);
-  await expect(page.getByRole("link", { name: /Explore the app/i }).last()).toHaveAttribute("href", "/en/apps/lovespin");
+  await expect(page.locator("button.poster-preview-trigger")).toHaveCount(4);
 });
 
-test("LoveSpin detail links to the published app without an embedded preview", async ({ page }) => {
+test("LoveSpin detail links to the published app and opens a localized demo", async ({ page }) => {
   await page.goto("/en/apps/lovespin");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("LoveSpin");
-  await expect(page.locator(".poster-preview-trigger")).toHaveCount(0);
-  await expect(page.locator(".app-launch").first()).toHaveAttribute("href", "https://spin.justours.love/?lang=en");
+  await page.locator(".poster-preview-trigger").click();
+  const modal = page.getByRole("dialog");
+  await expect(modal.locator("iframe")).toHaveAttribute("src", /\/demo\?lang=en$/);
+  await expect(modal.locator(".preview-loading")).toHaveCount(0);
+  const demo = modal.frameLocator("iframe");
+  await expect(demo.getByRole("button", { name: "Begin the story" })).toBeVisible();
+  await demo.getByRole("button", { name: "Begin the story" }).click();
+  await expect(demo.getByRole("button", { name: "Spin", exact: true })).toBeVisible();
+  await expect(page.locator(".app-launch").first()).toHaveAttribute("href", /^(?:https:\/\/spin\.justours\.love|http:\/\/127\.0\.0\.1:3415)\/\?lang=en$/);
 });
 
 test("poster preview opens a lazy modal and preserves locale", async ({ page }) => {

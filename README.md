@@ -10,7 +10,7 @@ pnpm dev
 ```
 
 For the local Love Mailbox modal preview, run its repository on `127.0.0.1:3411`. The showcase remains on `127.0.0.1:3400`.
-LoveSpin runs locally on `127.0.0.1:3415`. It has no embedded demo, so the storefront links directly to its application.
+LoveSpin runs locally on `127.0.0.1:3415`. Its localized `/demo` is embedded in the storefront preview; production serves it from `spin.justours.love`.
 
 ## Production
 
