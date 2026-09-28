@@ -29,7 +29,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const copy = siteCopy[locale];
   return <main>
     <section className="hero">
-      <div className="hero-backdrop" aria-hidden><div className="hero-orbit orbit-one" /><div className="hero-orbit orbit-two" /><div className="hero-figures"><span /><span /></div><div className="grain" /></div>
+      <div className="hero-backdrop" aria-hidden><div className="hero-hearts" /><div className="grain" /></div>
       <HeroMotion><p className="eyebrow">{copy.heroKicker}</p><h1><span>Just Ours Love</span>{copy.heroTitle}</h1><p className="hero-copy">{copy.heroBody}</p><Link className="text-link light" href={`/${locale}#collection`}>{copy.heroCta}<span aria-hidden>↓</span></Link></HeroMotion>
       <p className="hero-index" aria-hidden>01 — {String(apps.length).padStart(2, "0")}</p>
     </section>

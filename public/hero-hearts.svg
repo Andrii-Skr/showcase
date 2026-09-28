@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" fill="none">
+  <defs>
+    <linearGradient id="heart" x1="164" y1="176" x2="735" y2="854" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#db91a4" stop-opacity=".78"/>
+      <stop offset=".43" stop-color="#8c435f" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#2b1725" stop-opacity=".82"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="166" y1="174" x2="734" y2="861" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f8d1d1" stop-opacity=".75"/>
+      <stop offset=".58" stop-color="#d88a9c" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#efbbc5" stop-opacity=".1"/>
+    </linearGradient>
+    <radialGradient id="shine" cx="0" cy="0" r="1" gradientTransform="translate(318 325) rotate(47) scale(500 420)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f9c7c8" stop-opacity=".25"/>
+      <stop offset="1" stop-color="#f9c7c8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <path d="M450 925C380 865 104 650 75 430C50 250 150 148 290 162C380 170 430 235 450 290C470 235 520 170 610 162C750 148 850 250 825 430C796 650 520 865 450 925Z" fill="url(#heart)" stroke="url(#edge)" stroke-width="3"/>
+  <path d="M450 925C380 865 104 650 75 430C50 250 150 148 290 162C380 170 430 235 450 290C470 235 520 170 610 162C750 148 850 250 825 430C796 650 520 865 450 925Z" fill="url(#shine)"/>
+  <path d="M294 207C200 193 125 266 119 369" stroke="#f8d5d5" stroke-opacity=".3" stroke-width="3" stroke-linecap="round"/>
+  <path d="M450 1020C337 925-11 667 14 391C29 176 165 72 318 92C390 101 433 129 450 157C467 129 510 101 582 92C735 72 871 176 886 391C911 667 563 925 450 1020Z" stroke="#eac0ca" stroke-opacity=".2" stroke-width="2"/>
+  <path d="M684 143C674 133 633 102 629 70C625 45 639 30 659 32C672 33 680 43 684 51C688 43 696 33 709 32C729 30 743 45 739 70C735 102 694 133 684 143Z" fill="#f2b7c0" fill-opacity=".36"/>
+  <path d="M181 847C173 840 142 816 139 791C136 771 147 759 163 761C173 762 179 769 181 776C184 769 190 762 200 761C216 759 227 771 224 791C221 816 190 840 181 847Z" stroke="#f5c4c9" stroke-opacity=".48" stroke-width="2"/>
+</svg>

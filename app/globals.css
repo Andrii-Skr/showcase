@@ -31,16 +31,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--rose); outline-
 
 .eyebrow { margin: 0; font-size: .65rem !important; line-height: 1.4 !important; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; }
 .hero { position: relative; min-height: 100svh; overflow: hidden; display: flex; align-items: flex-end; padding: calc(68px + 7svh) 20px max(30px, 5svh); isolation: isolate; }
-.hero-backdrop { position: absolute; inset: 0; z-index: -2; overflow: hidden; background: radial-gradient(circle at 70% 27%, #8d485f 0, #4b2638 27%, #20121c 60%, #100b0f 100%); }
-.hero-backdrop::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(16,11,15,.85) 0%, rgba(16,11,15,.23) 45%, rgba(16,11,15,.18) 100%), linear-gradient(0deg, rgba(16,11,15,.7), transparent 42%); }
+.hero-backdrop { position: absolute; inset: 0; z-index: -2; overflow: hidden; background: radial-gradient(circle at 74% 42%, #562b40 0, #2c1928 44%, #100b0f 100%); }
+.hero-backdrop::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(16,11,15,.86) 0%, rgba(16,11,15,.32) 55%, rgba(16,11,15,.08) 100%), linear-gradient(0deg, rgba(16,11,15,.55), transparent 38%); }
 .grain { position: absolute; inset: -50%; opacity: .16; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E"); transform: rotate(5deg); }
-.hero-orbit { position: absolute; border: 1px solid rgba(245,234,223,.18); border-radius: 50%; }
-.orbit-one { width: 126vw; height: 126vw; right: -53vw; top: -18vw; }
-.orbit-two { width: 78vw; height: 78vw; right: -18vw; top: 26vw; }
-.hero-figures { position: absolute; right: -22vw; bottom: -3svh; width: 76vw; height: 76svh; opacity: .7; }
-.hero-figures span { position: absolute; bottom: 0; width: 54%; height: 91%; border-radius: 48% 48% 4% 4% / 22% 22% 4% 4%; background: linear-gradient(115deg, rgba(245,234,223,.24), rgba(64,31,45,.9) 36%, #170e15 80%); box-shadow: inset 30px 0 60px rgba(250,202,198,.11); }
-.hero-figures span:first-child { left: 0; transform: rotate(7deg); clip-path: polygon(18% 0, 66% 0, 94% 17%, 100% 100%, 0 100%, 2% 28%); }
-.hero-figures span:last-child { right: 0; height: 86%; transform: rotate(-5deg); background: linear-gradient(245deg, rgba(245,234,223,.18), rgba(60,29,42,.9) 35%, #140d12 80%); clip-path: polygon(34% 0, 78% 3%, 100% 28%, 96% 100%, 0 100%, 6% 18%); }
+.hero-hearts { position: absolute; right: -31vw; top: 10svh; width: 110vw; height: 88svh; background: url("/hero-hearts.svg") center / contain no-repeat; opacity: .72; }
 .hero-inner { position: relative; z-index: 2; width: 100%; max-width: 580px; }
 .hero h1 { max-width: 92vw; margin: 1.2rem 0 1.35rem; font-family: var(--serif); font-weight: 400; font-size: clamp(3.35rem, 16vw, 5.25rem); letter-spacing: -.052em; line-height: .86; }
 .hero h1 span { display: block; margin-bottom: .18em; font-family: var(--sans); font-size: .15em; letter-spacing: .22em; line-height: 1; text-transform: uppercase; font-weight: 500; color: var(--rose); }
@@ -64,9 +58,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--rose); outline-
 .story-art { padding: 0 12px 8svh; }
 .artwork-shell { position: relative; width: 100%; }
 .artwork { position: relative; width: 100%; min-height: 0; aspect-ratio: 3 / 4; overflow: hidden; background: color-mix(in srgb, var(--app-accent) 14%, #160f14); isolation: isolate; }
-.artwork img { transition: transform .8s cubic-bezier(.22,1,.36,1); }
 .artwork-poster { object-fit: contain; z-index: 2; }
-.artwork:hover .artwork-poster { transform: scale(.992); }
 .artwork-glow { position: absolute; inset: 0; background: radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--app-accent) 42%, transparent), transparent 68%); opacity: .55; z-index: 0; }
 
 .final-cta { min-height: 76svh; display: flex; align-items: center; justify-content: center; padding: 11svh 20px; text-align: center; background: radial-gradient(circle at 50% 20%, #492737, var(--ink) 60%); }
@@ -122,9 +114,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--rose); outline-
 .gallery-strip { display: grid; overflow-x: auto; grid-template-columns: repeat(3, 84vw); gap: 12px; padding: 0 20px 1rem; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .gallery-strip::-webkit-scrollbar { display: none; }
 .gallery-item { position: relative; aspect-ratio: 3 / 4; overflow: hidden; background: #25161f; scroll-snap-align: center; }
-.gallery-item img { transition: transform .7s cubic-bezier(.22,1,.36,1); }
 .gallery-poster { object-fit: contain; }
-.gallery-item:hover .gallery-poster { transform: scale(.992); }
 .detail-final { min-height: 72svh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10svh 20px; text-align: center; border-top: 1px solid rgba(21,13,19,.15); }
 .detail-final h2 { max-width: 950px; margin: 1.3rem 0; font-family: var(--serif); font-size: clamp(3rem, 6vw, 7rem); line-height: .94; font-weight: 400; letter-spacing: -.05em; }
 
@@ -157,9 +147,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--rose); outline-
   .hero h1 { margin: 1.5rem 0 1.8rem; font-size: clamp(3.4rem, 7.7vw, 8.3rem); }
   .hero-copy { max-width: 570px; margin-bottom: 2.1rem; font-size: clamp(1rem, 1.35vw, 1.25rem); line-height: 1.65; }
   .hero-index { display: block; }
-  .hero-figures { right: 8vw; bottom: -2vh; width: 38vw; height: 84vh; opacity: 1; }
-  .orbit-one { width: 64vw; height: 64vw; right: -12vw; top: -25vw; }
-  .orbit-two { width: 38vw; height: 38vw; right: 4vw; top: 4vw; }
+  .hero-hearts { right: -3vw; top: 2svh; width: 57vw; height: 100svh; opacity: 1; }
   .text-link { gap: 1rem; font-size: .72rem; letter-spacing: .18em; }
   .collection-intro { min-height: 78vh; padding: 12vh 9vw; }
   .collection-intro h2 { margin-top: 1.5rem; font-size: clamp(3rem, 6vw, 7rem); }

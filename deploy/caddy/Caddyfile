@@ -10,6 +10,36 @@ justours.love {
 
 analytics.justours.love {
 	encode zstd gzip
+
+	# Umami GHSA-3xx8-742v-m4mq: public share links are not used on this
+	# installation, so reject the headers that turn leaked cache tokens into
+	# analytics read access.
+	@umamiShareToken header X-Umami-Share-Token *
+	respond @umamiShareToken "Forbidden" 403
+
+	@umamiShareContext header X-Umami-Share-Context *
+	respond @umamiShareContext "Forbidden" 403
+
+	# Keep normal dashboard use comfortable while containing scanners. Auth has
+	# a separate, tighter budget; IPv6 clients are grouped by their /64 prefix.
+	rate_limit {
+		zone analytics_general {
+			key {remote_host}
+			events 300
+			window 1m
+			ipv6_prefix 64
+		}
+		zone analytics_auth {
+			match {
+				path /api/auth/*
+			}
+			key {remote_host}
+			events 12
+			window 1m
+			ipv6_prefix 64
+		}
+	}
+
 	reverse_proxy analytics:3000
 
 	log {
@@ -21,6 +51,18 @@ analytics.justours.love {
 unseal.justours.love {
 	encode zstd gzip
 	reverse_proxy unseal:3000 {
+		header_up X-Real-IP {remote_host}
+	}
+
+	log {
+		output stdout
+		format json
+	}
+}
+
+paw.justours.love {
+	encode zstd gzip
+	reverse_proxy paw:3000 {
 		header_up X-Real-IP {remote_host}
 	}
 
